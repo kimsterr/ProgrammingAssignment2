@@ -30,7 +30,7 @@ makeCacheMatrix <- function(x = matrix()) {
 ## already cached. Otherwise, the function simply returns the cached inverse 
 ## without needing to compute it again.
 cacheSolve <- function(special_obj, ...) {
-    inv <- special_obj$getinv()
+    inv <- special_obj$getinverse()
     
     # Inverse already cached; no need to recompute it
     if (!is.null(inv)) {
@@ -38,9 +38,9 @@ cacheSolve <- function(special_obj, ...) {
         return(inv)
     }
     
-    ## Return a matrix that is the inverse (after caching it)
+    ## Compute the inverse matrix, cache it, and return it
     the_matrix <- special_obj$get()
     inv <- solve(the_matrix)
-    special_obj$setinv(inv)
+    special_obj$setinverse(inv)
     inv
 }
